@@ -1,0 +1,31 @@
+---
+// src/components/Link.astro
+import type { HTMLAttributes } from "astro/types";
+import Icon from "@/components/Icon.astro";
+
+interface Props extends HTMLAttributes<"a"> {
+    href: string;
+}
+
+const { href, ...attrs } = Astro.props;
+const isPdf = href && href.toLowerCase().endsWith(".pdf");
+---
+
+<a href={href} {...attrs}>
+    <slot />
+    {isPdf && <Icon name="pdf" />}
+</a>
+
+<style>
+    a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+        text-decoration: underline solid var(--link-decoration-color) 4px;
+        text-underline-offset: 5px;
+    }
+    .icon-wrapper {
+        width: 20px;
+        height: 20px;
+    }
+</style>

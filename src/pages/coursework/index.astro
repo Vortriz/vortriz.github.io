@@ -1,0 +1,122 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Course from "@/components/Course.astro";
+
+const mainCourses = [
+    {
+        title: "IDC402: Nonlinear dynamics, chaos and complex systems",
+        session: "Spring'24-25",
+        instructor: "Dr. Anil Kumar Dasanna",
+        materials: [
+            {
+                text: "Term Paper",
+                href: "https://raw.githubusercontent.com/Vortriz/IISERM/refs/heads/main/IDC402/term-paper/term-paper.pdf",
+            },
+            {
+                text: "Accompanying code",
+                href: "/coursework/IDC402/term-paper",
+            },
+        ],
+    },
+    {
+        title: "IDC621: Modelling complex systems",
+        session: "Monsoon'24-25",
+        instructor: "Dr. Sudeshna Sinha",
+        materials: [
+            {
+                text: "Term Paper on Sandpile Model",
+                href: "/coursework/IDC621/term-paper-1",
+                is_large_file: true,
+            },
+            {
+                text: "Term Paper on Kuramoto Model",
+                href: "/coursework/IDC621/term-paper-2",
+                is_large_file: true,
+            },
+            {
+                text: "Term Paper on Coupled Map Lattice",
+                href: "/coursework/IDC621/term-paper-3",
+                is_large_file: true,
+            },
+            {
+                text: "Term Paper on Complex Networks",
+                href: "/coursework/IDC621/term-paper-4",
+                is_large_file: true,
+            },
+        ],
+    },
+];
+
+const seminarCourses = [
+    {
+        title: "IDC452: Seminar Delivery II",
+        session: "Spring'24-25",
+        materials: [
+            {
+                text: "Presentation",
+                href: "https://raw.githubusercontent.com/Vortriz/IISERM/refs/heads/main/IDC452/presentation.pdf",
+            },
+        ],
+    },
+    {
+        title: "IDC451: Seminar Delivery I",
+        session: "Monsoon'24-25",
+        materials: [
+            {
+                text: "Presentation",
+                href: "https://raw.githubusercontent.com/Vortriz/IISERM/refs/heads/main/IDC451/presentation.pdf",
+            },
+        ],
+    },
+];
+---
+
+<BaseLayout title="Coursework">
+    <main class="coursework-page">
+        <h1>Coursework</h1>
+        <p>Here is some of the coursework I did as a part of my studies at IISERM.</p>
+
+        <section>
+            <ul class="course-list">
+                {mainCourses.map((course) => <Course {...course} />)}
+            </ul>
+        </section>
+
+        <p>We also had two seminar delivery courses as a part of our curriculum.</p>
+
+        <section>
+            <ul class="course-list">
+                {seminarCourses.map((course) => <Course {...course} />)}
+            </ul>
+        </section>
+    </main>
+</BaseLayout>
+
+<style>
+    .coursework-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 1.8em;
+    }
+    p {
+        text-align: justify;
+        margin-bottom: 2rem;
+    }
+    h1,
+    h2 {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--nav-link-color);
+        padding-bottom: 0.5rem;
+    }
+    section {
+        margin-bottom: 4rem;
+    }
+    .course-list {
+        list-style-type: none;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+</style>

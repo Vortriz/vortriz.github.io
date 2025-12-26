@@ -1,0 +1,29 @@
+---
+// src/components/RemoteHTML.astro
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+    url: string;
+}
+
+const { url, ...attrs } = Astro.props;
+
+let htmlContent = "";
+
+if (!url) {
+    htmlContent = "<p>Error: No URL was provided to the RemoteHTML component.</p>";
+} else {
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            htmlContent = await response.text();
+        } else {
+            htmlContent = `<p><strong>Error:</strong> Could not fetch content from the provided URL.</p><p><strong>Status:</strong> ${response.status}</p><p><strong>URL:</strong> ${url}</p>`;
+        }
+    } catch (error) {
+        htmlContent = `<p><strong>Error:</strong> Failed to fetch remote content.</p><p><strong>Message:</strong> ${error.message}</p><p><strong>URL:</strong> ${url}</p>`;
+    }
+}
+---
+
+<div {...attrs} set:html={htmlContent} />

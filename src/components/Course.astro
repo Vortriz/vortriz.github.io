@@ -1,0 +1,91 @@
+---
+import Link from "@/components/Link.astro";
+import Icon from "@/components/Icon.astro";
+
+interface Material {
+    text: string;
+    href: string;
+    is_large_file?: boolean;
+}
+
+interface Props {
+    title: string;
+    session?: string;
+    instructor?: string;
+    materials?: Material[];
+}
+
+const { title, session, instructor, materials } = Astro.props;
+---
+
+<li class="course">
+    <strong>{title}</strong><br />
+    {
+        session && (
+            <span>
+                <em>Session:</em> {session}
+                <br />
+            </span>
+        )
+    }
+    {
+        instructor && (
+            <span>
+                <em>Instructor:</em> {instructor}
+                <br />
+            </span>
+        )
+    }
+
+    {
+        materials && materials.length > 0 && (
+            <div class="material-container">
+                <em>Material:</em>
+                <ul class="material-list">
+                    {materials.map((material) => (
+                        <li>
+                            <Link href={material.href}>{material.text}</Link>
+                            {material.is_large_file && (
+                                <span
+                                    class="warning-icon"
+                                    title="Large file, may take a while to load!"
+                                >
+                                    <Icon name="warning" />
+                                </span>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+</li>
+
+<style>
+    .course {
+        line-height: 1.8em;
+    }
+    .material-container {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+    }
+    .material-list {
+        list-style-type: none;
+        padding-left: 0.25rem;
+        margin: 0;
+    }
+    .material-list li {
+        padding-left: 0.5em;
+        display: flex;
+        align-items: center;
+    }
+    .warning-icon {
+        display: inline-block;
+        width: 1.2em;
+        height: 1.2em;
+        vertical-align: text-bottom;
+        margin-left: 8px;
+        color: var(--warn-color);
+    }
+</style>

@@ -1,0 +1,82 @@
+---
+import Header from "@/components/Header.astro";
+const { title } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <style>
+            :root {
+                --bg-color: #f3e0ce;
+                --text-color: #221810;
+                --nav-link-color: #5f6368;
+                --nav-link-hover-color: #000;
+                --link-decoration-color: #ee99a0;
+                --warn-color: #cf4141;
+            }
+
+            [data-theme="dark"] {
+                --bg-color: #181818;
+                --text-color: #f0f0f0;
+                --nav-link-color: #9e9e9e;
+                --nav-link-hover-color: #fff;
+                --link-decoration-color: #f5a97f;
+                --warn-color: #c24c4c;
+            }
+            html {
+                font-family: "Maple Mono Normal NF", sans-serif;
+            }
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            body.enable-transitions {
+                transition:
+                    background-color 0.2s,
+                    color 0.2s;
+            }
+
+            body :global(a) {
+                color: var(--text-color);
+                text-decoration: underline solid var(--link-decoration-color) 4px;
+            }
+        </style>
+        <script is:inline>
+            const getTheme = () => {
+                if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+                    return localStorage.getItem("theme");
+                }
+                if (
+                    window.matchMedia &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                ) {
+                    return "dark";
+                }
+                return "light";
+            };
+
+            const applyTheme = (theme) => {
+                if (theme === "dark") {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                } else {
+                    document.documentElement.removeAttribute("data-theme");
+                }
+            };
+
+            const initialTheme = getTheme();
+            applyTheme(initialTheme);
+        </script>
+    </head>
+    <body>
+        <Header />
+        <slot />
+    </body>
+</html>

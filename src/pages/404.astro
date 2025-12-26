@@ -1,0 +1,70 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404: Page Not Found">
+    <div class="container">
+        <img src="/404-light.svg" alt="Page not found illustration" class="light-image" />
+        <img src="/404-dark.png" alt="Page not found illustration" class="dark-image" />
+        <h1>404: Page Not Found</h1>
+        <p>Oopsie woopsie! The page you're looking for doesn't exist.</p>
+        <a href="/" class="home-link">Return Home</a>
+    </div>
+</BaseLayout>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 80vh;
+        padding: 2rem;
+    }
+
+    .light-image,
+    .dark-image {
+        max-width: 400px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 2rem;
+    }
+
+    .dark-image {
+        display: none;
+    }
+
+    :global([data-theme="dark"]) .light-image {
+        display: none;
+    }
+
+    :global([data-theme="dark"]) .dark-image {
+        display: block;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        max-width: 500px;
+    }
+
+    .home-link {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        background-color: var(--link-decoration-color);
+        color: var(--bg-color);
+        transition: transform 0.2s;
+    }
+
+    .home-link:hover {
+        transform: scale(1.05);
+    }
+</style>

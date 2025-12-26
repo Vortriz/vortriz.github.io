@@ -1,0 +1,39 @@
+<script>
+    const updateIcons = (theme) => {
+        const themeToggle = document.getElementById("theme-toggle");
+        if (!themeToggle) return;
+        const sunIcon = themeToggle.querySelector(".sun");
+        const moonIcon = themeToggle.querySelector(".moon");
+        if (!sunIcon || !moonIcon) return;
+
+        if (theme === "dark") {
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "block";
+        } else {
+            sunIcon.style.display = "block";
+            moonIcon.style.display = "none";
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("enable-transitions");
+
+        // We need to call this here to set the initial state of the icons
+        // It's safe to call getTheme because it's defined in the head
+        updateIcons(getTheme());
+
+        const themeToggle = document.getElementById("theme-toggle");
+        if (themeToggle) {
+            themeToggle.addEventListener("click", () => {
+                const currentTheme = document.documentElement.hasAttribute("data-theme")
+                    ? "dark"
+                    : "light";
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                localStorage.setItem("theme", newTheme);
+                applyTheme(newTheme);
+                updateIcons(newTheme);
+            });
+        }
+    });
+</script>
+<slot />

@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout title="Rishi's Portfolio">
+    <main>
+        <div class="profile">
+            <img src="/profile-photo.png" alt="Rishi" class="profile-pic" />
+            <h1>Hi, I'm Rishi!</h1>
+            <p>
+                I am a 5th year BS-MS student at IISER Mohali. I am currently doing my thesis at
+                IISER Pune on Generative Quantum Machine Learning.
+            </p>
+            <p>Please feel free to get in touch!</p>
+            <div class="social-links">
+                <a href="mailto:example@example.com" aria-label="Email" title="Email">
+                    <Icon name="email" />
+                </a>
+                <a href="https://github.com" aria-label="GitHub" title="GitHub">
+                    <Icon name="github" />
+                </a>
+                <a href="https://linkedin.com" aria-label="LinkedIn" title="LinkedIn">
+                    <Icon name="linkedin" />
+                </a>
+            </div>
+        </div>
+    </main>
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .profile {
+            max-width: 600px;
+            margin-top: -10vh; /* Pull the profile up a bit */
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 10px 0;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-links a {
+            color: var(--text-color);
+            transition: color 0.2s;
+        }
+        .social-links a:hover {
+            color: var(--nav-link-hover-color);
+        }
+        .social-links .icon-wrapper {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</BaseLayout>

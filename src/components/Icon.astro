@@ -1,0 +1,33 @@
+---
+// src/components/Icon.astro
+import { promises as fs } from "fs";
+import path from "path";
+
+const { name, class: className, ...rest } = Astro.props;
+const iconPath = path.join(process.cwd(), "public", `${name}.svg`);
+let svgContent = "";
+try {
+    const rawSvg = await fs.readFile(iconPath, "utf-8");
+    // Remove width, height, and stroke attributes to allow CSS control
+    svgContent = rawSvg.replace(/width=".*?"/, "").replace(/height=".*?"/, "");
+} catch (e) {
+    console.error(`Could not read icon: ${iconPath}`, e);
+}
+---
+
+<div class:list={["icon-wrapper", className]} {...rest} set:html={svgContent} />
+
+<style>
+    .icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit; /* Inherit color from parent by default */
+    }
+    .icon-wrapper :global(svg) {
+        width: 100%;
+        height: 100%;
+        stroke: currentColor; /* Use the parent's color for the stroke */
+        fill: none; /* Ensure fill is not used unless specified */
+    }
+</style>

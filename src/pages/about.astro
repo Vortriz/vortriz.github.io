@@ -1,0 +1,107 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+---
+
+<BaseLayout title="About Me">
+    <main class="about-page">
+        <h1>About Me</h1>
+        <section class="intro">
+            <div class="intro-text">
+                <p>Hi, my name is Rishi!</p>
+                <p>
+                    I am a 5th year BS-MS student at <a href="https://www.iisermohali.ac.in"
+                        >IISER Mohali</a
+                    >, pursuing Physics Major and Data Science Minor. I am currently doing my
+                    Master's thesis at <a href="https://www.iiserpune.ac.in">IISER Pune</a> on Generative
+                    Quantum Machine Learning under the supervision of <a
+                        href="https://sites.iiserpune.ac.in/~santh/"
+                    >
+                        Prof. Santhanam</a
+                    >.
+                </p>
+            </div>
+            <div class="intro-image">
+                <img src="/about-me-photo.png" alt="Rishi" />
+            </div>
+        </section>
+        <section>
+            <h2>Research interests</h2>
+            <p>
+                During my internships, I have explored Quantum Key Distribution protocols and
+                Quantum algorithms. I loved working on Complex Systems and Networks during my IDC621
+                course. Currently, I am exploring more topics in Quantum Computation to see what
+                piques me!
+            </p>
+        </section>
+        <section>
+            <h2>Other interests</h2>
+            <p>
+                Besides this, I advocate for reproducibility in science. This was primarily
+                influenced a lot by <a href="https://nixos.org">NixOS</a><img
+                    src="/nixos.svg"
+                    alt="NixOS icon"
+                    class="nixos-icon"
+                />. So I try to keep my projects and their tooling reproducible :)
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 by Rishi Vora · Last updated: 27 December, 2025</p>
+    </footer>
+</BaseLayout>
+
+<style>
+    .nixos-icon {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        margin-left: 0.25rem;
+    }
+    .about-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 2em;
+        font-weight: 400;
+    }
+    .intro {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .intro {
+            flex-direction: column;
+        }
+    }
+    .intro-text {
+        flex: 2;
+    }
+    .intro-image {
+        flex: 1;
+    }
+    .intro-image img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    section {
+        text-align: justify;
+    }
+    h1,
+    h2 {
+        margin-bottom: 1rem;
+    }
+    footer {
+        text-align: center;
+        margin-top: 4rem;
+        padding-top: 2rem;
+        color: var(--nav-link-color);
+        font-size: 0.9rem;
+    }
+    footer a {
+        color: var(--nav-link-color);
+        text-decoration: underline solid var(--nav-link-color) 2px !important;
+    }
+</style>
