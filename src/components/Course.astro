@@ -21,50 +21,57 @@ const { title, session, instructor, materials } = Astro.props;
 
 <li class="course">
     <strong class="course-title">{title}</strong><br />
-    {
-        session && (
-            <span>
-                <strong>Session:</strong> {session}
-                <br />
-            </span>
-        )
-    }
-    {
-        instructor && (
-            <span>
-                <strong>Instructor:</strong> {instructor}
-                <br />
-            </span>
-        )
-    }
+    <ul class="course-details">
+        {
+            session && (
+                <li>
+                    <strong>Session:</strong> {session}
+                    <br />
+                </li>
+            )
+        }
+        {
+            instructor && (
+                <li>
+                    <strong>Instructor:</strong> {instructor}
+                    <br />
+                </li>
+            )
+        }
 
-    {
-        materials && materials.length > 0 && (
-            <div class="material-container">
-                <strong>Material:</strong>
-                <ul class="material-list">
-                    {materials.map((material) => (
-                        <li>
-                            <Link href={material.href}>{material.text}</Link>
-                            {material.is_large_file && (
-                                <span
-                                    class="warning-icon"
-                                    data-tooltip="Large file! May take a while to load."
-                                >
-                                    <Icon name="warning" />
-                                </span>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        )
-    }
+        {
+            materials && materials.length > 0 && (
+                <li>
+                    <div class="material-container">
+                        <strong>Material:</strong>
+                        <ul class="material-list">
+                            {materials.map((material) => (
+                                <li>
+                                    <Link href={material.href}>{material.text}</Link>
+                                    {material.is_large_file && (
+                                        <span
+                                            class="warning-icon"
+                                            data-tooltip="Large file! May take a while to load."
+                                        >
+                                            <Icon name="warning" />
+                                        </span>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </li>
+            )
+        }
+    </ul>
 </li>
 
 <style>
     .course-title {
         font-size: 1.2em;
+    }
+    .course-details {
+        list-style-type: disc;
     }
     .material-container {
         display: flex;
@@ -72,7 +79,6 @@ const { title, session, instructor, materials } = Astro.props;
         align-items: baseline;
     }
     .material-list {
-        list-style-type: none;
         padding-left: 0.25rem;
         margin: 0;
     }
@@ -88,7 +94,14 @@ const { title, session, instructor, materials } = Astro.props;
         vertical-align: text-bottom;
         margin-left: 8px;
         color: var(--warn-color);
+        opacity: 0.7;
         cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .material-container {
+            flex-direction: column;
+        }
     }
 </style>
 <script>
