@@ -35,7 +35,7 @@ import ThemeController from "@/components/ThemeController.astro";
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        font-family: "Maple Mono Normal NF", sans-serif;
+        font-family: "Maple Mono", sans-serif;
         word-spacing: -4px;
     }
     .right-nav {
@@ -116,6 +116,20 @@ import ThemeController from "@/components/ThemeController.astro";
             padding: 5px;
             z-index: 20;
         }
+    }
+
+    /* Theme toggle icons */
+    html:not([data-theme="dark"]) .moon {
+        display: none;
+    }
+    html:not([data-theme="dark"]) .sun {
+        display: block;
+    }
+    html[data-theme="dark"] .sun {
+        display: none;
+    }
+    html[data-theme="dark"] .moon {
+        display: block;
     }
 </style>
 <script>

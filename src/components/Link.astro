@@ -1,5 +1,4 @@
 ---
-// src/components/Link.astro
 import type { HTMLAttributes } from "astro/types";
 import Icon from "@/components/Icon.astro";
 
@@ -8,7 +7,7 @@ interface Props extends HTMLAttributes<"a"> {
 }
 
 const { href, ...attrs } = Astro.props;
-const isPdf = href && href.toLowerCase().endsWith(".pdf");
+const isPdf = href?.toLowerCase().endsWith(".pdf");
 ---
 
 <a href={href} {...attrs}>

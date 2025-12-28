@@ -1,5 +1,7 @@
 ---
 import Header from "@/components/Header.astro";
+import "@fontsource/maple-mono";
+
 const { title, description = "My personal portfolio website." } = Astro.props;
 const image = "/favicon.svg";
 const url = Astro.url;
@@ -27,6 +29,8 @@ const url = Astro.url;
                 --nav-link-hover-color: #000;
                 --link-decoration-color: #ee99a0;
                 --warn-color: #cf4141;
+                --tooltip-bg-color: #181818;
+                --tooltip-text-color: #f0f0f0;
             }
 
             [data-theme="dark"] {
@@ -36,9 +40,11 @@ const url = Astro.url;
                 --nav-link-hover-color: #fff;
                 --link-decoration-color: #f5a97f;
                 --warn-color: #c24c4c;
+                --tooltip-bg-color: #f3e0ce;
+                --tooltip-text-color: #221810;
             }
             html {
-                font-family: "Maple Mono Normal NF", sans-serif;
+                font-family: "Maple Mono", sans-serif;
             }
             body {
                 background-color: var(--bg-color);

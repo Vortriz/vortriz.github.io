@@ -1,6 +1,7 @@
 ---
-import Link from "@/components/Link.astro";
+
 import Icon from "@/components/Icon.astro";
+import Link from "@/components/Link.astro";
 
 interface Material {
     text: string;
@@ -19,11 +20,11 @@ const { title, session, instructor, materials } = Astro.props;
 ---
 
 <li class="course">
-    <strong>{title}</strong><br />
+    <strong class="course-title">{title}</strong><br />
     {
         session && (
             <span>
-                <em>Session:</em> {session}
+                <strong>Session:</strong> {session}
                 <br />
             </span>
         )
@@ -31,7 +32,7 @@ const { title, session, instructor, materials } = Astro.props;
     {
         instructor && (
             <span>
-                <em>Instructor:</em> {instructor}
+                <strong>Instructor:</strong> {instructor}
                 <br />
             </span>
         )
@@ -40,7 +41,7 @@ const { title, session, instructor, materials } = Astro.props;
     {
         materials && materials.length > 0 && (
             <div class="material-container">
-                <em>Material:</em>
+                <strong>Material:</strong>
                 <ul class="material-list">
                     {materials.map((material) => (
                         <li>
@@ -48,7 +49,7 @@ const { title, session, instructor, materials } = Astro.props;
                             {material.is_large_file && (
                                 <span
                                     class="warning-icon"
-                                    title="Large file, may take a while to load!"
+                                    data-tooltip="Large file! May take a while to load."
                                 >
                                     <Icon name="warning" />
                                 </span>
@@ -64,6 +65,9 @@ const { title, session, instructor, materials } = Astro.props;
 <style>
     .course {
         line-height: 1.8em;
+    }
+    .course-title {
+        font-size: 1.2em;
     }
     .material-container {
         display: flex;
@@ -87,5 +91,100 @@ const { title, session, instructor, materials } = Astro.props;
         vertical-align: text-bottom;
         margin-left: 8px;
         color: var(--warn-color);
+        cursor: pointer;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let tooltipPortal = document.getElementById("tooltip-portal");
+
+        if (!tooltipPortal) {
+            tooltipPortal = document.createElement("div");
+            tooltipPortal.id = "tooltip-portal";
+
+            const style = document.createElement("style");
+            style.textContent = `
+                #tooltip-portal {
+                    position: fixed;
+                    width: 140px;
+                    background-color: var(--tooltip-bg-color);
+                    color: var(--tooltip-text-color);
+                    font-size: 0.7em;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 8px;
+                    z-index: 1000;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+                    border: 1px solid var(--border-color);
+                    line-height: 1.2em;
+                    pointer-events: none;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.3s, visibility 0.3s;
+                }
+                #tooltip-portal.visible {
+                    opacity: 0.95;
+                    visibility: visible;
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(tooltipPortal);
+        }
+
+        let activeIcon = null;
+
+        const showTooltip = (icon) => {
+            activeIcon = icon;
+            tooltipPortal.textContent = icon.dataset.tooltip;
+            const rect = icon.getBoundingClientRect();
+
+            let top = rect.top - tooltipPortal.offsetHeight - 5;
+            let left = rect.left + rect.width / 2 - tooltipPortal.offsetWidth / 2;
+
+            if (top < 0) {
+                top = rect.bottom + 5;
+            }
+            if (left < 0) {
+                left = 5;
+            }
+            if (left + tooltipPortal.offsetWidth > window.innerWidth) {
+                left = window.innerWidth - tooltipPortal.offsetWidth - 5;
+            }
+
+            tooltipPortal.style.top = `${top}px`;
+            tooltipPortal.style.left = `${left}px`;
+            tooltipPortal.classList.add("visible");
+        };
+
+        const hideTooltip = () => {
+            activeIcon = null;
+            tooltipPortal.classList.remove("visible");
+        };
+
+        document.querySelectorAll(".warning-icon").forEach((icon) => {
+            icon.addEventListener("mouseenter", () => showTooltip(icon));
+            icon.addEventListener("mouseleave", hideTooltip);
+            icon.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (activeIcon === icon) {
+                    hideTooltip();
+                } else {
+                    showTooltip(icon);
+                }
+            });
+        });
+
+        document.addEventListener("click", () => {
+            if (activeIcon) hideTooltip();
+        });
+
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (activeIcon) hideTooltip();
+            },
+            true,
+        );
+    });
+</script>

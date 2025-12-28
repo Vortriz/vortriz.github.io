@@ -1,5 +1,4 @@
 ---
-// src/components/RemoteHTML.astro
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -11,7 +10,8 @@ const { url, ...attrs } = Astro.props;
 let htmlContent = "";
 
 if (!url) {
-    htmlContent = "<p>Error: No URL was provided to the RemoteHTML component.</p>";
+    htmlContent =
+        "<p>Error: No URL was provided to the RemoteHTML component.</p>";
 } else {
     try {
         const response = await fetch(url);
