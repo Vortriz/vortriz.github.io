@@ -5,7 +5,11 @@
     ];
 
     perSystem =
-        { self', ... }:
+        {
+            self',
+            pkgs,
+            ...
+        }:
         {
             pre-commit.settings.hooks = {
                 flake-checker = {
@@ -15,6 +19,12 @@
                 treefmt = {
                     enable = true;
                     package = self'.formatter;
+                };
+                last-updated = {
+                    enable = true;
+                    name = "Last Updated updater";
+                    entry = toString (pkgs.writeShellScript "last-updated" "date '+%d %B, %Y' > last-updated");
+                    pass_filenames = false;
                 };
             };
         };

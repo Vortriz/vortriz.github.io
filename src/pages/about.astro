@@ -1,6 +1,8 @@
 ---
+import { readFile } from "node:fs/promises";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Icon from "@/components/Icon.astro";
+
+const lastUpdated = await readFile("last-updated", "utf-8");
 ---
 
 <BaseLayout title="About Me" description="About me">
@@ -10,44 +12,48 @@ import Icon from "@/components/Icon.astro";
             <div class="intro-text">
                 <p>Hi, my name is Rishi!</p>
                 <p>
-                    I am a 5th year BS-MS student at <a href="https://www.iisermohali.ac.in"
-                        >IISER Mohali</a
-                    >, pursuing Physics Major and Data Science Minor. I am currently doing my
-                    Master's thesis at <a href="https://www.iiserpune.ac.in">IISER Pune</a> on Generative
-                    Quantum Machine Learning under the supervision of <a
-                        href="https://sites.iiserpune.ac.in/~santh/"
-                    >
+                    I am a 5th year BS-MS student at <a
+                        href="https://www.iisermohali.ac.in">IISER Mohali</a
+                    >, pursuing Physics Major and Data Science Minor. I am
+                    currently doing my Master's thesis at <a
+                        href="https://www.iiserpune.ac.in">IISER Pune</a
+                    > on Generative Quantum Machine Learning under the supervision
+                    of <a href="https://sites.iiserpune.ac.in/~santh/">
                         Prof. Santhanam</a
                     >.
                 </p>
             </div>
             <div class="intro-image">
-                <img src="/about-me-photo.png" alt="Rishi" />
+                <img src="/about-me-photo.png" alt="Rishi Vora" />
             </div>
         </section>
         <section>
             <h2>Research interests</h2>
             <p>
-                During my internships, I have explored Quantum Key Distribution protocols and
-                Quantum algorithms. I loved working on Complex Systems and Networks during my IDC621
-                course. Currently, I am exploring more topics in Quantum Computation to see what
-                piques me!
+                During my internships, I have explored Quantum Key Distribution
+                protocols and Quantum algorithms. I loved working on Complex
+                Systems and Networks during my IDC621 course. Currently, I am
+                exploring more topics in Quantum Computation to see what piques
+                me!
             </p>
         </section>
         <section>
             <h2>Other interests</h2>
             <p>
-                Besides this, I advocate for reproducibility in science. This was primarily
-                influenced a lot by <a href="https://nixos.org">NixOS</a><img
-                    src="/nixos.svg"
-                    alt="NixOS icon"
-                    class="nixos-icon"
-                />. So I try to keep my projects and their tooling reproducible :)
+                Besides this, I advocate for reproducibility in science. This
+                was primarily influenced a lot by <a href="https://nixos.org"
+                    >NixOS</a
+                ><img src="/nixos.svg" alt="NixOS icon" class="nixos-icon" />.
+                So I try to keep my projects and their tooling reproducible :)
             </p>
         </section>
     </main>
     <footer>
-        <p>© 2025 by Rishi Vora · Last updated: 27 December, 2025</p>
+        <div class="footer-info">
+            <span>© 2025 by Rishi Vora</span>
+            <span class="separator">·</span>
+            <span class="last-updated">Last updated: {lastUpdated.trim()}</span>
+        </div>
     </footer>
 </BaseLayout>
 
@@ -103,5 +109,23 @@ import Icon from "@/components/Icon.astro";
     footer a {
         color: var(--nav-link-color);
         text-decoration: underline solid var(--nav-link-color) 2px !important;
+    }
+    .footer-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .separator {
+        margin: 0 0.5em;
+    }
+
+    @media (max-width: 600px) {
+        .footer-info {
+            flex-direction: column;
+        }
+        .separator {
+            display: none;
+        }
     }
 </style>
