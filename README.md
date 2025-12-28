@@ -10,21 +10,21 @@ This is a personal portfolio website built with Astro.
     nix develop
     ```
 
-2.  **Install NPM dependencies**:
+2.  **Install dependencies**:
 
     ```bash
-    npm install
+    bun install
     ```
 
 3.  **Run the development server**:
 
     ```bash
-    npm run dev
+    bun run dev
     ```
 
 4.  **Build for production**:
     ```bash
-    npm run build
+    bun run build
     ```
 
 ## 📝 License

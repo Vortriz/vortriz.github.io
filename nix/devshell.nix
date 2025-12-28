@@ -12,8 +12,7 @@
                 buildInputs = config.pre-commit.settings.enabledPackages;
 
                 packages = with pkgs; [
-                    nodejs_latest
-                    prettier
+                    bun
                 ];
             };
         };
