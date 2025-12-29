@@ -3,17 +3,40 @@ import RemoteHTML from "@/components/RemoteHTML.astro";
 
 export function getStaticPaths() {
     return [
-        { params: { slug: "IDC402/term-paper" } },
-        { params: { slug: "IDC621/term-paper-1" } },
-        { params: { slug: "IDC621/term-paper-2" } },
-        { params: { slug: "IDC621/term-paper-3" } },
-        { params: { slug: "IDC621/term-paper-4" } },
+        {
+            params: { slug: "IDC402/term-paper" },
+            props: { remotePath: "IDC402/term-paper/index.html" },
+        },
+        {
+            params: { slug: "IDC621/term-paper-1" },
+            props: { remotePath: "IDC621/term-paper-1/index.html" },
+        },
+        {
+            params: { slug: "IDC621/term-paper-2" },
+            props: { remotePath: "IDC621/term-paper-2/index.html" },
+        },
+        {
+            params: { slug: "IDC621/term-paper-3" },
+            props: { remotePath: "IDC621/term-paper-3/index.html" },
+        },
+        {
+            params: { slug: "IDC621/term-paper-4" },
+            props: { remotePath: "IDC621/term-paper-4/index.html" },
+        },
+        {
+            params: { slug: "IDC409/classic" },
+            props: { remotePath: "IDC409/src/__marimo__/classic.html" },
+        },
+        {
+            params: { slug: "IDC409/cnn" },
+            props: { remotePath: "IDC409/src/__marimo__/cnn.html" },
+        },
     ];
 }
 
-const { slug } = Astro.params;
+const { remotePath } = Astro.props;
 
-const url = `https://raw.githubusercontent.com/Vortriz/IISERM/main/${slug}/index.html`;
+const url = `https://raw.githubusercontent.com/Vortriz/IISERM/main/${remotePath}`;
 ---
 
 <RemoteHTML url={url} />
