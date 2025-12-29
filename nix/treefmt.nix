@@ -39,6 +39,7 @@
                                 indentWidth = 4;
                             };
                             javascript.formatter.quoteStyle = "double";
+                            # html.experimentalFullSupportEnabled = true;
                             linter = {
                                 enabled = true;
                                 rules.recommended = true;
