@@ -1,0 +1,19 @@
+---
+import RemoteHTML from "@/components/RemoteHTML.astro";
+
+export function getStaticPaths() {
+    return [
+        { params: { slug: "IDC402/term-paper" } },
+        { params: { slug: "IDC621/term-paper-1" } },
+        { params: { slug: "IDC621/term-paper-2" } },
+        { params: { slug: "IDC621/term-paper-3" } },
+        { params: { slug: "IDC621/term-paper-4" } },
+    ];
+}
+
+const { slug } = Astro.params;
+
+const url = `https://raw.githubusercontent.com/Vortriz/IISERM/main/${slug}/index.html`;
+---
+
+<RemoteHTML url={url} />
