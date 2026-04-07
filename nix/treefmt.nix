@@ -28,7 +28,7 @@
 
                             schema = pkgs.fetchurl {
                                 url = "https://biomejs.dev/schemas/${pkgs.biome.version}/schema.json";
-                                sha256 = "sha256-iGFDTliW7WKae+f8C6Ksic9rul8dU+0veygfLQmI/XE=";
+                                sha256 = "sha256-8XUDeq8Y4JEBJ+A2gnCI+KUXJJ8Pe3QkKNOReDrCpKg=";
                             };
                         };
 
