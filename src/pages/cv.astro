@@ -1,0 +1,66 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV | Rishi's Portfolio</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #525659; /* Standard PDF viewer background color */
+        }
+        .status {
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-family: sans-serif;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="cv-status" class="status">Loading CV...</div>
+    <iframe id="cv-iframe" title="CV" style="display: none;"></iframe>
+
+    <script>
+        async function loadCV() {
+            const status = document.getElementById('cv-status');
+            const iframe = document.getElementById('cv-iframe') as HTMLIFrameElement;
+
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/Vortriz/cv/main/cv.pdf');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const blob = await response.blob();
+                const pdfBlob = new Blob([blob], { type: 'application/pdf' });
+                const url = URL.createObjectURL(pdfBlob);
+
+                if (iframe) {
+                    iframe.src = url;
+                    iframe.style.display = 'block';
+                    if (status) status.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                if (status) {
+                    status.innerHTML = `Error loading CV. <a href="https://raw.githubusercontent.com/Vortriz/cv/main/cv.pdf" style="color: #61afef;">Click here to view it directly.</a>`;
+                }
+            }
+        }
+
+        loadCV();
+    </script>
+</body>
+</html>
