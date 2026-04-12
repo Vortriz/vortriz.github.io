@@ -90,12 +90,10 @@ const lastUpdated = await readFile("last-updated", "utf-8");
         width: 100%;
         border-radius: 5px;
     }
-    section {
-        text-align: justify;
-    }
     h1,
     h2 {
         margin-bottom: 1rem;
+        margin-top: 2rem;
     }
     footer {
         text-align: center;
@@ -118,7 +116,7 @@ const lastUpdated = await readFile("last-updated", "utf-8");
         margin: 0 0.5em;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         .footer-info {
             flex-direction: column;
         }

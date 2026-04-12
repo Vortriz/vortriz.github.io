@@ -1,6 +1,5 @@
 ---
 import Header from "@/components/Header.astro";
-import "@fontsource/maple-mono";
 
 const { title, description = "My personal portfolio website." } = Astro.props;
 const image = "/favicon.svg";
@@ -22,6 +21,22 @@ const url = Astro.url;
         <meta property="og:type" content="website" />
 
         <style>
+            @font-face {
+                font-family: 'Maple Mono';
+                src: url('/fonts/MapleMono-Variable/MapleMono[wght].ttf') format('truetype-variations');
+                font-weight: 100 900;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'Maple Mono';
+                src: url('/fonts/MapleMono-Variable/MapleMono-Italic[wght].ttf') format('truetype-variations');
+                font-weight: 100 900;
+                font-style: italic;
+                font-display: swap;
+            }
+
             :root {
                 --bg-color: #f3e0ce;
                 --text-color: #221810;
@@ -50,10 +65,24 @@ const url = Astro.url;
                 background-color: var(--bg-color);
                 color: var(--text-color);
                 line-height: 1.8em;
+                font-weight: 500; /* Increased from default */
                 margin: 0;
                 padding: 0;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: 800; /* Extra bold headings */
+            }
+
+            @media (max-width: 768px) {
+                html {
+                    font-size: 14px;
+                }
+                body {
+                    line-height: 1.5em;
+                }
             }
             body.enable-transitions {
                 transition:
