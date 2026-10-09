@@ -2,8 +2,8 @@
     "name": "portfolio",
     "version": "1.0.0",
     "dependencies": {
-        "@astrojs/mdx": "^4.3.13",
-        "astro": "^5.16.6"
+        "@astrojs/mdx": "^4.3.14",
+        "astro": "^5.18.2"
     },
     "scripts": {
         "dev": "astro dev",

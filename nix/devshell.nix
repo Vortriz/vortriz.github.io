@@ -11,9 +11,7 @@
 
                 buildInputs = config.pre-commit.settings.enabledPackages;
 
-                packages = with pkgs; [
-                    bun
-                ];
+                packages = [ pkgs.deno ];
             };
         };
 }

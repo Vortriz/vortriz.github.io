@@ -4,28 +4,28 @@ This is a personal portfolio website built with Astro.
 
 ## Project Setup
 
-1.  **General dependencies**:
+1. **General dependencies**:
 
-    ```bash
-    nix develop
-    ```
+   ```bash
+   nix develop
+   ```
 
-2.  **Install dependencies**:
+2. **Install dependencies**:
 
-    ```bash
-    bun install
-    ```
+   ```bash
+   deno install
+   ```
 
-3.  **Run the development server**:
+3. **Run the development server**:
 
-    ```bash
-    bun run dev
-    ```
+   ```bash
+   deno run dev
+   ```
 
-4.  **Build for production**:
-    ```bash
-    bun run build
-    ```
+4. **Build for production**:
+   ```bash
+   deno run build
+   ```
 
 ## 📝 License
 
